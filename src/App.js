@@ -2,21 +2,36 @@ import React, { Component } from 'react';
 import './App.css';
 
 function alcoholCalculator() {
-    var beers = 3; // glasses
-    var size = 16; // oz.
-    var abv = 7/100; // in percentage
+    var beers = 1; // glasses
+    var size = 12; // oz.
+    var abv = 5.9/100; // in percentage
 
     var alcoholicdrinks = beers*size*abv/0.6;
     return alcoholicdrinks.toPrecision(3);
 }
 
-function DrinksResult(props) {
-  return (
-    <div>
-      <p>{props.numDrinks} Drinks</p>
-      <p>{alcoholCalculator()} Drinks</p>
-    </div>
-  );
+class DrinksResult extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {numDrinks: "5.6"}
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
+
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.numDrinks} Drinks</p>
+        <p>{alcoholCalculator()} Drinks</p>
+      </div>
+    );
+  }
 }
 
 class App extends Component {
@@ -30,7 +45,7 @@ class App extends Component {
 
       </div>
       <div className="DrinksResult">
-        <DrinksResult numDrinks="5.6" />
+        <DrinksResult />
       </div>
     </div>
   }
