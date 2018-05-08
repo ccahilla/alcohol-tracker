@@ -19,9 +19,7 @@ function DrinksResult(props) {
   );
 }
 
-// This is comment...
 class App extends Component {
-//  class AlcoholicDrinksCalculator extends Component {
   render() {
     return <div className="AlcoholicDrinksCalculator">
       <h1>Alcoholic Drinks Calculator</h1>
@@ -37,9 +35,5 @@ class App extends Component {
     </div>
   }
 };
-
-class App2 extends Component {
-  render() { return <h1>herp derp</h1> };
-}
 
 export default App
