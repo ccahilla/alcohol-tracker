@@ -21,7 +21,7 @@ function DrinksResult(props) {
 
 class App extends Component {
   render() {
-    return <div className="AlcoholicDrinksCalculator">
+    return <div className="App">
       <h1>Alcoholic Drinks Calculator</h1>
       <div className="InputForm">
         <p>Number of Drinks Consumed</p>
