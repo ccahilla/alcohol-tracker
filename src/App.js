@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-function alcoholCalculator() {
+function alcoholCalculator(props) {
     var beers = 2; // glasses
     var size = 12; // oz.
     var abv = 5.9/100; // in percentage
@@ -13,7 +13,7 @@ function alcoholCalculator() {
 class DrinksResult extends Component {
   constructor(props) {
     super(props);
-    this.state = {numDrinks: "5.6"}
+    this.state = {numDrinks: alcoholCalculator()}
   }
 
   componentDidMount() {
@@ -136,6 +136,40 @@ class FlavorForm extends Component {
   }
 }
 
+function BoilingVerdict(props) {
+  if (props.celcius >= 100) {
+    return <p>The water would boil.</p>;
+  }
+  return <p>The water would not boil.</p>;
+}
+
+class Calculator extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {temperature: ''};
+  }
+
+  handleChange(e) {
+    this.setState({temperature: e.target.value});
+  }
+
+  render() {
+    const temperature = this.state.temperature;
+    return (
+      <fieldset>
+        <legend>Enter temperature in Celcius:</legend>
+        <input
+          value={temperature}
+          onChange={this.handleChange} />
+
+        <BoilingVerdict
+          celcius={parseFloat(temperature)} />
+      </fieldset>
+    )
+  }
+}
+
 class App extends Component {
   render() {
     return <div className="App">
@@ -157,6 +191,9 @@ class App extends Component {
       </div>
       <div className="FlavorForm">
         <FlavorForm />
+      </div>
+      <div className="Calculator">
+        <Calculator />
       </div>
     </div>
   }
