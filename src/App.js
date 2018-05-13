@@ -3,18 +3,27 @@ import './App.css';
 
 function AlcoholVerdict(props) {
     var alcoholicdrinks = props.beers*props.size*props.abv/0.6;
-    return <p>alcoholicdrinks.toPrecision(3)</p>;
+    return <p>{alcoholicdrinks.toPrecision(2)} Drinks.</p>;
 }
 
 class DrinksResult extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleBeerChange = this.handleBeerChange.bind(this);
+    this.handleSizeChange = this.handleSizeChange.bind(this);
+    this.handleAbvChange = this.handleAbvChange.bind(this);
+
     this.state = { beers: 3, size: 12, abv: 5.0/100 };
    }
 
-  handleChange(e) {
-    this.setState({ beers: e.target.value, size: e.target.value, abv: e.target.value, });
+  handleBeerChange(e) {
+    this.setState({ beers: e.target.value });
+  }
+  handleSizeChange(e) {
+    this.setState({ size: e.target.value });
+  }
+  handleAbvChange(e) {
+    this.setState({ abv: e.target.value });
   }
 
   render() {
@@ -23,60 +32,28 @@ class DrinksResult extends Component {
     const abv = this.state.abv;
     return (
       <fieldset>
+        <label>Number of Drinks Consumed</label>
         <legend>Alcoholic Drinks Calculator</legend>
         <input
           value={beers}
-          onChange={this.handleChange} />
-        <label>Number of Drinks Consumed</label>
-        <input
-          value={size}
-          onChange={this.handleChange} />
+          onChange={this.handleBeerChange} />
+        <br />
         <label>Amount of liquid in each drink (oz.)</label>
         <input
-          value={abv}
-          onChange={this.handleChange} />
+          value={size}
+          onChange={this.handleSizeChange} />
+        <br />
         <label>ABV (%)</label>
+        <input
+          value={abv}
+          onChange={this.handleAbvChange} />
+        <br />
         <AlcoholVerdict
           beers={beers}
           size={size}
           abv={abv} />
       </fieldset>
     );
-  }
-}
-
-
-function BoilingVerdict(props) {
-  if (props.celcius >= 100) {
-    return <p>The water would boil.</p>;
-  }
-  return <p>The water would not boil.</p>;
-}
-
-class Calculator extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = {temperature: ''};
-  }
-
-  handleChange(e) {
-    this.setState({temperature: e.target.value});
-  }
-
-  render() {
-    const temperature = this.state.temperature;
-    return (
-      <fieldset>
-        <legend>Enter temperature in Celcius:</legend>
-        <input
-          value={temperature}
-          onChange={this.handleChange} />
-
-        <BoilingVerdict
-          celcius={parseFloat(temperature)} />
-      </fieldset>
-    )
   }
 }
 
@@ -88,9 +65,6 @@ class App extends Component {
 
       <div className="DrinksResult">
         <DrinksResult />
-      </div>
-      <div className="Calculator">
-        <Calculator />
       </div>
     </div>
   }
