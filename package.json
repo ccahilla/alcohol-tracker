@@ -2,7 +2,7 @@
   "name": "alcohol-tracker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ccahilla.github.io/alcohol-tracker/index",
+  "homepage": "https://ccahilla.github.io/BACEstimator",
   "dependencies": {
     "bootstrap": "^4.1.1",
     "pretty-checkbox": "^3.0.3",
