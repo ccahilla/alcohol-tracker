@@ -3,6 +3,7 @@ import MathJax from 'react-mathjax2';
 import { ButtonToolbar } from 'react-bootstrap';
 import { ToggleButtonGroup } from 'react-bootstrap';
 import { ToggleButton } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import './App.css';
 
 function AlcoholVerdict(props) {
@@ -73,7 +74,7 @@ class DrinksResult extends Component {
         this.handleWeightChange = this.handleWeightChange.bind(this); 
         this.handleTimeChange = this.handleTimeChange.bind(this); 
 
-        this.state = { beers: 1, size: 12, abv: 5.0, isFemale: true, isMale: false, weight: 150, time: 1.0 };
+        this.state = { beers: 1, size: 12, abv: 5.0, isFemale: true, isMale: false, weight: 150, time: 0.25 };
     }
 
     handleBeerChange(e) {
@@ -111,73 +112,80 @@ class DrinksResult extends Component {
 
         const BACtex = `\\mathrm{BAC} = \\dfrac{0.806 \\times SD \\times 1.2}{BW \\times Wt} - MR \\times DP`
         return (
-            <div class="container">
-                <h1>Blood Alcohol Content (BAC) Estimator</h1>
-                <p>
-                    <label>How many drinks have you had?</label><br />
-                    <input type="text"
-                        value={beers}
-                        onChange={this.handleBeerChange} />
-                    <label>Amount of liquid in each drink (ounces)</label><br />
-                    <input type="text"
-                        value={size}
-                        onChange={this.handleSizeChange} />
-                </p>
-                <p>
-                    <label>Alcohol by Volume (ABV, %)</label><br />
-                    <input type="text"
-                        value={abv}
-                        onChange={this.handleAbvChange} />
-                </p>
-  
-                <div class="text-center">
-                    <label>What's your sex</label><br />
-                
-                    <ButtonToolbar>
-                        <ToggleButtonGroup justified type="radio" name="options" defaultValue={1}>
-                            <ToggleButton 
-                                value={1}
-                                checked={isFemale}
-                                onChange={this.handleFemaleSexChange}>
-                                Female
-                            </ToggleButton>
-                            <ToggleButton 
-                                value={2}
-                                checked={isMale}
-                                onChange={this.handleMaleSexChange}>
-                                Male
-                            </ToggleButton>
-                        </ToggleButtonGroup>
-                    </ButtonToolbar>
-                </div><br /> 
+            <div className="container">
+                <Row className="show-grid">
+                    <h1>Blood Alcohol Content (BAC) Estimator</h1>
+                    <Col md={6}>
+                        <h2>Estimated Blood Alcohol Content (BAC)</h2>
+                        <CalculateBAC
+                            beers={beers}
+                            size={size}
+                            abv={abv}
+                            isFemale={isFemale}
+                            isMale={isMale}
+                            weight={weight}
+                            time={time} />
 
-                <p>
-                    <label>What's your weight? (pounds)</label><br />
-                    <input type="text"
-                        value={weight}
-                        onChange={this.handleWeightChange} />
-                </p>
-                <p>
-                    <label>How long have you been drinking? (hours)</label><br />
-                    <input type="text"
-                        value={time}
-                        onChange={this.handleTimeChange} />
-                </p>
-                <h2>Estimated Blood Alcohol Content (BAC)</h2>
-                <CalculateBAC
-                    beers={beers}
-                    size={size}
-                    abv={abv}
-                    isFemale={isFemale}
-                    isMale={isMale}
-                    weight={weight}
-                    time={time} />
+                        <label>
+                            The legal limit for driving in the US is BAC = 0.08.
+                        </label><br />
+                    </Col>
+                    <Col md={6}> 
+                        <p>
+                            <label>How many drinks have you had?</label><br />
+                            <input type="text"
+                                value={beers}
+                                onChange={this.handleBeerChange} />
+                        </p>
+                        <p>
+                            <label>Amount of liquid in each drink (ounces)</label><br />
+                            <input type="text"
+                                value={size}
+                                onChange={this.handleSizeChange} />
+                        </p>
+                        <p>
+                            <label>Alcohol by Volume (ABV, %)</label><br />
+                            <input type="text"
+                                value={abv}
+                                onChange={this.handleAbvChange} />
+                        </p>
+          
+                        <div class="text-center">
+                            <label>What's your sex</label><br />
+                        
+                            <ButtonToolbar>
+                                <ToggleButtonGroup justified type="radio" name="options" defaultValue={1}>
+                                    <ToggleButton 
+                                        value={1}
+                                        checked={isFemale}
+                                        onChange={this.handleFemaleSexChange}>
+                                        Female
+                                    </ToggleButton>
+                                    <ToggleButton 
+                                        value={2}
+                                        checked={isMale}
+                                        onChange={this.handleMaleSexChange}>
+                                        Male
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </ButtonToolbar>
+                        </div>
+                        <br /> 
 
-                <label>
-                    The legal limit for driving in the US is BAC = 0.08.
-                </label><br />
-
-
+                        <p>
+                            <label>What's your weight? (pounds)</label><br />
+                            <input type="text"
+                                value={weight}
+                                onChange={this.handleWeightChange} />
+                        </p>
+                        <p>
+                            <label>How long have you been drinking? (hours)</label><br />
+                            <input type="text"
+                                value={time}
+                                onChange={this.handleTimeChange} />
+                        </p>
+                    </Col>
+                </Row>
                 <AlcoholVerdict
                     beers={beers}
                     size={size}
